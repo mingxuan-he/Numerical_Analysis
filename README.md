@@ -1,4 +1,4 @@
-# Numerical_Analysis
+# Numerical Analysis by Mingxuan He
 ## Description:
 I'm currently (Fall 2020 term 2) taking MAT-317 Numerical Analysis, an advanced-level applied mathematics course at Grinnell College. During the course I would regularly implement numerical algorithms in Python and (in some rare occasions) in MATLAB, and I will be sharing my code on Github along the way. 
 
