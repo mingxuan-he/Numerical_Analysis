@@ -16,7 +16,7 @@ Below is a brief description of what each of the algorithms in the package does.
 - This algorithm evaluate a polynomial with real coefficients a and basepoints b at the point x and returns that value as y
 - Converting a polynomial into the nested form before evaluating is much more efficient than regular methods since it requires significantly less operations.
 
-### The bisection method for root finding (*bisection*)
+### Bisection method for root finding (*bisection*)
 - Contained in numerics1_he
 - This algorithm finds a root of a function by bisecting a real interval which we know contains the root.
 
