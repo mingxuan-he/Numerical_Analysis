@@ -19,3 +19,8 @@ Below is a brief description of what each of the algorithms in the package does.
 ### The bisection method for root finding (*bisection*)
 - Contained in numerics1_he
 - This algorithm finds a root of a function by bisecting a real interval which we know contains the root.
+
+### Fixed point iteration (*fixedpt*)
+- Contained in numerics1_he
+- This algorithm finds a fixed point of a function by iteratively taking its own result as the function input
+- Requires the function and initial value to satisfy certain conditions in order to give a convergent fixed point (see Thm 1.2.a and Thm 1.2.b)
