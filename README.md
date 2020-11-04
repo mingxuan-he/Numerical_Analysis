@@ -12,15 +12,15 @@ Citations: Some code snippets and most test files are taken from my instructor p
 Below is a brief description of what each of the algorithms in the package does. I did not have time for a comprehensive documentation, but you can refer to comments in the code for more information.
 
 ### Nested Polynomials (*polynest*)
-- Contained in numerics0_he
+- Implemented in numerics0_he
 - This algorithm evaluate a polynomial with real coefficients a and basepoints b at the point x and returns that value as y
 - Converting a polynomial into the nested form before evaluating is much more efficient than regular methods since it requires significantly less operations.
 
 ### Bisection method for root finding (*bisection*)
-- Contained in numerics1_he
+- Implemented in numerics1_he
 - This algorithm finds a root of a function by bisecting a real interval which we know contains the root.
 
 ### Fixed point iteration (*fixedpt*)
-- Contained in numerics1_he
+- Implemented in numerics1_he
 - This algorithm finds a fixed point of a function by iteratively taking its own result as the function input
 - Requires the function and initial value to satisfy certain conditions in order to give a convergent fixed point (see Thm 1.2.a and Thm 1.2.b)
