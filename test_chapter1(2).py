@@ -16,8 +16,8 @@ xinit  = 1.0  # this is the inital estimate for fixed point iteration and newton
 # set them to zero if you don't.
 run_bisection = 0
 run_plotting  = 0
-run_fixedpt   = 1
-run_newton    = 0
+run_fixedpt   = 0
+run_newton    = 1
 
 if (run_bisection):
   print("\n\n ****** BISECTION ***** \n")
@@ -82,7 +82,7 @@ if (run_fixedpt):
   print("With tolerance = %0.2e and maxIter = %d, FPI gets the approximate value %0.12f." % (tol, maximumIterations, rt))
   print("This took %d iterations." % (roots.size))
 
-"""
+
 if (run_newton):
   print("\n\n ****** NEWTON ***** \n")
   # we need to define the derivative of the function for Newton's Method
@@ -102,6 +102,6 @@ if (run_newton):
   print("This took %d iterations." % (roots.size))
   print("\n Thought exercise: For this function with this initial estimate, what do you notice about the change in output and number of iterations and what does it mean about the result returned using the default tolerance?\n\n")
 
-"""
+
 
 

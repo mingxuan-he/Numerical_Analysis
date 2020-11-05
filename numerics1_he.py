@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def bisection(function, left_endpoint, right_endpoint, tolerance=1.0e-6, maxIter=100):
@@ -52,6 +51,7 @@ def bisection(function, left_endpoint, right_endpoint, tolerance=1.0e-6, maxIter
 
 """
 Bisection simple test run:
+
 def f(x):
     return pow(x,2) - 1
 
@@ -61,11 +61,11 @@ print(bisection(f,0,2))
 
 def fixedpt(function, xinit, tolerance=1.0e-6, maxIter=100):
     # function is a numerical function with single variable/input x
-    # x init is the initial input value for x (guessed)
+    # xinit is the initial input value for x (guessed)
     # tolerance is the error/precision we are looking for, default is 1.0e-6
     # maxIter is the max number of iterations, stops the algorithm once reached
-    # Important note: the method might not find a convergent fixed point if the conditions of Thm 1.2.a are not met.
-    # If not, first convert the function into g(x) which FPI can be applied
+    # Important note: The conditions in Thm 1.2.a must be satisfied.
+    # If the original function does not satisfy the conditions, first convert the function into g(x) which FPI can be applied.
 
     # Initialization
     x = xinit
@@ -91,7 +91,7 @@ def fixedpt(function, xinit, tolerance=1.0e-6, maxIter=100):
 
 
 """
-Simple test run:
+Newton simple test run:
 
 def f(x):
     return pow(x,2)
@@ -100,3 +100,87 @@ print(fixedpt(f,0.1))
 """
 
 
+def newton(function, dfunction, xinit, tolerance=1.0e-6, maxIter=100):
+    # function is a numerical function with single variable/input x
+    # xinit is the initial input value for x (guessed)
+    # dfunction is the derivative of function
+    # tolerance is the error/precision we are looking for, default is 1.0e-6
+    # maxIter is the max number of iterations, stops the algorithm once reached
+    # Important note: the derivative at the target root cannot be zero (simple root) so that the function converges locally and quadratically
+
+    # Initialization
+    x = xinit
+    fx = function(x)
+    dfx = dfunction(x)
+    iter_count = 0
+    err = fx / dfx
+    roots = np.zeros((maxIter, 1))
+    roots[0] = xinit
+
+    while err > tolerance and iter_count < maxIter:
+        # update x, f(x) iteratively, then compute the error
+        x = x - (fx / dfx)
+        fx = function(x)
+        dfx = dfunction(x)
+        err = abs(fx / dfx)
+        roots[iter_count+1] = x
+        iter_count += 1
+        #print(x)
+        #print(fx)
+
+    return x, roots[0:iter_count+1]
+
+"""
+Secant simple test run:
+
+def f(x):
+    return x**3 -1
+
+def df(x):
+    return 3 * x**2
+
+print(newton(f,df,2))
+"""
+
+
+def secant(function, xinit, tolerance=1.0e-6, maxIter=100):
+    # function is a numerical function with single variable/input x
+    # xinit is the initial input value for x (guessed)
+    # tolerance is the error/precision we are looking for, default is 1.0e-6
+    # maxIter is the max number of iterations, stops the algorithm once reached
+    # Important note: the secant method is similar to the Newton's method except that it does not require derivative of f
+
+    # Initialization
+    x = xinit
+    fx = function(x)
+    sec = fx
+    iter_count = 0
+    err = fx / sec
+    roots = np.zeros((maxIter, 1))
+    roots[0] = xinit
+    fvals = np.zeros((maxIter, 1))
+    fvals[0]= fx
+
+    while err > tolerance and iter_count < maxIter:
+        # update x, f(x) iteratively, then compute the error
+        x = x - (fx / sec)
+        fx = function(x)
+        sec = (fx - fvals[iter_count]) / (x - roots[iter_count])
+        err = abs(fx / sec)
+        roots[iter_count+1] = x
+        fvals[iter_count+1] = fx
+        iter_count += 1
+        print(x)
+        print(fx)
+
+    return x, roots[0:iter_count+1]
+
+
+"""
+Simple test run:
+
+def f(x):
+    return x**3 -1
+    
+print(secant(f,4))
+"""
