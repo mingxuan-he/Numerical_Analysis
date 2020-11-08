@@ -4,26 +4,26 @@ from Code import numerics1_he as num
 
 
 def fxn(x):
-  return np.exp(-0.5*x) + np.sin(x) - 2*x
+  return x * x - 0.24 - x
 
-ainput = 0.0  # left endpoint
-binput = 1.0  # and right endpoint of the interval for bisection.
-xinit  = 1.0  # this is the inital estimate for fixed point iteration and newton
+ainput = -0.4  # left endpoint
+binput = 0.4  # and right endpoint of the interval for bisection.
+xinit  = 0.15  # this is the initial estimate for fixed point iteration and newton
 
 # You can define your own functions and intervals.
 
 # change these to 1 if you want to test that section
 # set them to zero if you don't.
-run_bisection = 0
+run_bisection = 1
 run_plotting  = 0
-run_fixedpt   = 0
-run_newton    = 1
+run_fixedpt   = 1
+run_newton    = 0
 
 if (run_bisection):
   print("\n\n ****** BISECTION ***** \n")
 
-  rt, roots = num.bisection(fxn,ainput,binput)
-  print("With default tolerance, bisection gets the approximate value %0.12f." % (rt))
+  rt, roots = num.bisection(fxn,ainput,binput, tolerance=1.0e-10)
+  print("With e-10 tolerance, bisection gets the approximate value %0.12f." % (rt))
   print("This took %d iterations." % (roots.size))
 
 #print(roots)
@@ -63,7 +63,7 @@ if (run_fixedpt):
 
   # we need to convert the function above to a fixed point iteration.  Do that here:
   def gxn(x):
-    return x + fxn(x)
+    return x * x - 0.24
 
   tol = 1.0e-6  # default value not passed, just written for the print statment.
   rt, roots = num.fixedpt(gxn,xinit)
@@ -76,11 +76,23 @@ if (run_fixedpt):
   print("With tolerance = %0.2e, FPI gets the approximate value %0.12f." % (tol,rt))
   print("This took %d iterations." % (roots.size))
 
-  tol = 1.0e-8
+  tol = 1.0e-10
   maximumIterations = 2000
   rt, roots = num.fixedpt(gxn,xinit,tol,maximumIterations)
   print("With tolerance = %0.2e and maxIter = %d, FPI gets the approximate value %0.12f." % (tol, maximumIterations, rt))
   print("This took %d iterations." % (roots.size))
+
+  i = 0
+  err_ratios = [xinit]
+  for rt in roots[0:-1]:
+      print("Root:", rt)
+      err = abs((roots[i+1] + 0.2) / (rt + 0.2))
+      print("Error ratio:", err)
+      err_ratios.append(err)
+      i += 1
+
+
+
 
 
 if (run_newton):

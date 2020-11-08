@@ -1,9 +1,9 @@
 import numpy as np
 
 def polynest (x, a, b=[]):
-    # x is the input to the polynomial
-    # a is the vector of n+1 coefficients of the polynomial
-    # b is the vector of n base points. Default is empty
+    # x: the input to the polynomial
+    # a: the vector of n+1 coefficients of the polynomial
+    # b: the vector of n base points. Default is empty
     # This function evaluate a polynomial with coefficients a and basepoints b at the point x and returns that value as y
 
     # Read a,b as numpy arrays
