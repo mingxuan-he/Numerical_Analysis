@@ -8,7 +8,7 @@ def fxn(x):
 
 ainput = -0.4  # left endpoint
 binput = 0.4  # and right endpoint of the interval for bisection.
-xinit  = 0.15  # this is the initial estimate for fixed point iteration and newton
+xinit  = 0.5  # this is the initial estimate for fixed point iteration and newton
 
 # You can define your own functions and intervals.
 
