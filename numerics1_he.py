@@ -91,7 +91,7 @@ def fixedpt(function, xinit, tolerance=1.0e-6, maxIter=100):
 
 
 """
-Newton simple test run:
+FPI simple test run:
 
 def f(x):
     return pow(x,2)
@@ -131,7 +131,7 @@ def newton(function, dfunction, xinit, tolerance=1.0e-6, maxIter=100):
     return x, roots[0:iter_count+1]
 
 """
-Secant simple test run:
+Newton's method simple test run:
 
 def f(x):
     return x**3 -1
@@ -177,7 +177,7 @@ def secant(function, xinit, tolerance=1.0e-6, maxIter=100):
 
 
 """
-Simple test run:
+Secant method simple test run:
 
 def f(x):
     return x**3 -1
