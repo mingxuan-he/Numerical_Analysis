@@ -1,6 +1,7 @@
 import numpy as np
 
-def polynest (x, a, b=[]):
+
+def polynest(x, a, b=[]):
     # x: the input to the polynomial
     # a: the vector of n+1 coefficients of the polynomial
     # b: the vector of n base points. Default is empty
