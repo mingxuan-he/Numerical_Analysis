@@ -7,14 +7,14 @@ k = 500
 #A = np.random.rand(k,k)
 print(A)
 
-rowops = 1
-luonly = 1
-forwardsub = 1
-backsub = 1
-fbsub = 1
-lucomplete = 1
-jac = 0
-gs = 0
+rowops = 0
+luonly = 0
+forwardsub = 0
+backsub = 0
+fbsub = 0
+lucomplete = 0
+jac = 1
+gs = 1
 
 if (rowops):
     A = num.rowswap(A,2,0)
@@ -92,13 +92,13 @@ A=[[3, 1, -1],[2, -1, -1],[1, 3, 5]]
 b = np.array([1,2,3])
 xinit = np.zeros(b.shape)
 if (jac):
-    #xinit = [1.0, 1.0, 1.0]
+    xinit = [1.0, 1.0, 1.0]
     x = num.jacobi(A,b,xinit,1e-10,1000)
     print(x)
 
 xinit = np.zeros(b.shape)
 if (gs):
-    #xinit = [1.0, 1.0, 1.0]
+    xinit = [1.0, 1.0, 1.0]
     x = num.gausssiedel(A,b,xinit,1e-10,1000)
     print(x)
 
