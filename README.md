@@ -43,8 +43,19 @@ Below is a brief description of what each algorithm in the package does. I did n
 
 ### LU factorization (*lu, lusolve, noswaplu, noswaplusolve*)
 - Implemented in numerics2_he
-- Usage: Root finding for systems of linear equations (In matrix form, Ax=b where A is a n by n matrix and b is a vector of size n)
+- Usage: Precise root finding for systems of linear equations (In matrix form, Ax=b where A is a n by n matrix and b is a vector of size n)
 - This algorithm finds the root for a system of linear equations by factoring the permuted coefficient matrix PA (alternatively A itself) into a lower-triangular matrix L and an upper triangular matrix U, then solve PAx=LUx=Pb (alternatively Ax=LUx=b) using forward-backward substitution.
 - Helper functions: 
   - Row operations: *rowswap, rowscale, rowdiff*
   - Foward and backward substitution: *forwardsub, backwardsub, fbsolve*
+
+### Jacobi Method (*jacobi*)
+- Implemented in numerics2_he
+- Usage: Iterative rooting finding for systems of linear equations (In matrix form, Ax=b where A is a n by n matrix and b is a vector of size n)
+- This algorithm solves Ax=b iteratively using Jacobi Method (additive decomposition)
+- Helper function: *add_decomp*
+
+### Gauss-Siedel Method (*gausssiedel*)
+- Implemented in numerics2_he
+- Usage: Iterative rooting finding for systems of linear equations (In matrix form, Ax=b where A is a n by n matrix and b is a vector of size n)
+- This algorithm solves Ax=b iteratively using Gauss-Siedel Method (additive decomposition)
