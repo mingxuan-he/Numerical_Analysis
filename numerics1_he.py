@@ -165,13 +165,13 @@ def secant(function, xinit, tolerance=1.0e-6, maxIter=100):
         # update x, f(x) iteratively, then compute the error
         x = x - (fx / sec)
         fx = function(x)
-        sec = (fx - fvals[iter_count]) / (x - roots[iter_count])
+        sec = (fx - fvals[iter_count]) / (x - roots[iter_count])    # may switch to other approximation of the root
         err = abs(fx / sec)
         roots[iter_count+1] = x
         fvals[iter_count+1] = fx
         iter_count += 1
-        print(x)
-        print(fx)
+        #print(x)
+        #print(fx)
 
     return x, roots[0:iter_count+1]
 
