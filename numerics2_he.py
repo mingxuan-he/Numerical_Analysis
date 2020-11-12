@@ -42,7 +42,7 @@ def noswapLU(matrix):
 
     for col in range(n):
         L[col,col] = 1.0    # first write 1 in the diagonal entry of col in L
-        pivot = np.float(A[col,col]) # compute the scaling factor of the row combination
+        pivot = np.float(A[col,col]) # compute the pivot of the row combination
         # for each row index greater than the colum index, do row combination with this scaling factor
         for row in range(col+1,n):
             scalefactor = A[row,col] / pivot
@@ -192,3 +192,124 @@ def lusolve(A,b):
 
     return x
 
+
+def add_decomp(A):
+    # Performs additive decomposition on a square matrix A
+    # Returns a lower triangular matrix L, an upper triangular matrix U, and a diagonal matrix D.
+
+    # Check input:
+    A = np.asarray(A)
+    (m,n)= A.shape
+    if m != n:
+        raise ValueError("The input matrix must be square. Your matrix has size %d x %d" % (m,n))
+
+    # Initialize matrices L,U,D
+    L = np.zeros((m, n))
+    U = np.zeros((m, n))
+    D = np.zeros((m, n))
+
+    # Performs additive decomposition
+    for i in range(n):
+        D[i, i] = A[i, i]
+
+    for i in range(n):
+        for j in range(i):
+            L[i, j] = A[i, j]
+
+    for i in range(n):
+        for j in range(i + 1, n):
+            U[i, j] = A[i, j]
+
+    """
+    # Print matrices
+    print(L)
+    print(U)
+    print(D)
+    """
+
+    return L,U,D
+
+def jacobi(A, b, xinit, tolerance=1.0e-6, maxIter=100):
+    # A: an n by n matrix
+    # b: a vector
+    # xinit: the initial input value for x (guessed)
+    # tolerance: the error/precision we are looking for, default is 1.0e-6
+    # maxIter: the max number of iterations, stops the algorithm once reached
+    # This function solves Ax=b iteratively using Jacobi Method (additive decomposition), returns the solution vector x
+
+    # Check input:
+    A = np.asarray(A)
+    (m,n)= A.shape
+    if m != n:
+        raise ValueError("The input matrix must be square. Your matrix has size %d x %d" % (m,n))
+    b = np.asarray(b)
+    xinit = np.asarray(xinit)
+
+    # Initialize variables
+    x = xinit
+    iter_count = 0
+    roots = np.zeros((maxIter, n))
+    roots[0] = xinit
+    err = 10 # written as max(x_i-x) for now, should change to backward error ||b-Axi||_{\infty} later
+
+    while err > tolerance and iter_count < maxIter:
+
+        for i in range(n): # each entry of x
+            T_sum = 0
+            for j in range(n):
+                if j != i:
+                    T_sum += A[i,j] * roots[iter_count][j]
+                    #print("For i = %d, j = %d, T sum is %f" % (i,j,T_sum))
+
+            x[i] = (b[i] - T_sum) / A[i,i]
+        #print(x)
+        roots[iter_count+1] = x
+        err = max(abs(x - roots[iter_count]))
+        #print(err)
+        iter_count += 1
+
+
+    return x
+
+
+def gausssiedel(A, b, xinit, tolerance=1.0e-6, maxIter=100):
+    # A: an n by n matrix
+    # b: a vector
+    # xinit: the initial input value for x (guessed)
+    # tolerance: the error/precision we are looking for, default is 1.0e-6
+    # maxIter: the max number of iterations, stops the algorithm once reached
+    # This function solves Ax=b iteratively using Gauss-Siedel Method (additive decomposition), returns the solution vector x
+
+    # Check input:
+    A = np.asarray(A)
+    (m,n)= A.shape
+    if m != n:
+        raise ValueError("The input matrix must be square. Your matrix has size %d x %d" % (m,n))
+    b = np.asarray(b)
+    xinit = np.asarray(xinit)
+
+    # Initialize variables
+    x = xinit
+    iter_count = 0
+    roots = np.zeros((maxIter, n))
+    roots[0] = xinit
+    err = 10    # written as max(x_i-x) for now, should change to backward error ||b-Axi||_{\infty} later
+
+    while err > tolerance and iter_count < maxIter:
+
+        for i in range(n): # each entry of x
+            T_sum = 0
+            for j in range(i):
+                T_sum += A[i,j] * x[j]
+            for j in range(i+1,n):
+                T_sum += A[i,j] * roots[iter_count][j]
+
+            x[i] = (b[i] - T_sum) / A[i,i]
+
+        #print(x)
+        roots[iter_count+1] = x
+        err = max(abs(x - roots[iter_count]))
+        iter_count += 1
+
+
+    return x
