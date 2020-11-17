@@ -229,6 +229,7 @@ def add_decomp(A):
 
     return L,U,D
 
+
 def jacobi(A, b, xinit, tolerance=1.0e-6, maxIter=100):
     # A: an n by n matrix
     # b: a vector
@@ -268,7 +269,6 @@ def jacobi(A, b, xinit, tolerance=1.0e-6, maxIter=100):
         #print(err)
         iter_count += 1
 
-
     return x
 
 
@@ -282,7 +282,7 @@ def gausssiedel(A, b, xinit, tolerance=1.0e-6, maxIter=100):
 
     # Check input:
     A = np.asarray(A)
-    (m,n)= A.shape
+    (m,n) = A.shape
     if m != n:
         raise ValueError("The input matrix must be square. Your matrix has size %d x %d" % (m,n))
     b = np.asarray(b)
@@ -310,6 +310,5 @@ def gausssiedel(A, b, xinit, tolerance=1.0e-6, maxIter=100):
         roots[iter_count+1] = x
         err = max(abs(x - roots[iter_count]))
         iter_count += 1
-
 
     return x
