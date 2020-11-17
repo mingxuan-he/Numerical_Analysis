@@ -59,3 +59,8 @@ Below is a brief description of what each algorithm in the package does. I did n
 - Implemented in numerics2_he
 - Usage: Iterative rooting finding for systems of linear equations
 - This algorithm solves Ax=b iteratively using Gauss-Siedel Method (additive decomposition)
+
+### Least Squares (*leastSquares_lu*)
+- Implemented in numerics4_he
+- Usage: Modeling data
+- This algorithm uses LU factorization to solve the system A^tAx=A^tb to find a best-fit model that satisfies the least squares condition.
