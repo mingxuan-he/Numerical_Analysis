@@ -1,6 +1,22 @@
 import numpy as np
 
 
+def norm(vec, l):
+    # vec: a vector (1D numpy array)
+    # l: dimension of the norm, l = -1 is the l-infinity norm
+    # Returns the l-norm of a vector (a scalar)
+
+    # Check input
+    vec = np.asarray(vec)
+
+    if l == -1:
+        return max(abs(vec))
+
+    elif l > 0:
+        powerf = lambda t: t**l
+        return np.sum(powerf(abs(vec))) ** (1 / l)
+
+
 # Row operations:
 def rowdiff(matrix,k,j,scale=1.0):
     # matrix: a 2 dimensional numpy array
@@ -14,6 +30,7 @@ def rowdiff(matrix,k,j,scale=1.0):
 def rowswap(matrix,k,j):
     # matrix: a 2 dimensional numpy array
     # k,j: row numbers
+    # swap 2 rows in a matrix
     matrix[[k,j],:] = matrix[[j,k],:]
     return matrix
 
@@ -22,6 +39,7 @@ def rowscale(matrix,k,scale=1.0):
     # matrix: a 2 dimensional numpy array
     # k: row number
     # scale: a constant to scale row k
+    # scale a row in a matrix
     matrix[k,:] = scale * matrix[k,:]
     return matrix
 
@@ -141,7 +159,7 @@ def noswaplusolve(A,b):
 def lu(matrix):
     # matrix: an n by n matrix
     # This function performs PA=LU decomposition on the matrix
-    # Returns L, A, P
+    # Returns L, U, P
 
     # Check input:
     A = np.asarray(matrix)
@@ -176,6 +194,7 @@ def lu(matrix):
             scalefactor = A[row,col] / pivot
             L[row,col] = scalefactor
             A = rowdiff(A,row,col,scalefactor)
+            #print(A)
 
     # because of the row swapping, we need to add the ones along diagonal at the end
     L += np.identity(n)
@@ -251,7 +270,7 @@ def jacobi(A, b, xinit, tolerance=1.0e-6, maxIter=100):
     iter_count = 0
     roots = np.zeros((maxIter, n))
     roots[0] = xinit
-    err = 10 # written as max(x_i-x) for now, should change to backward error ||b-Axi||_{\infty} later
+    err = norm((b - np.dot(A, x)), -1)
 
     while err > tolerance and iter_count < maxIter:
 
@@ -265,7 +284,7 @@ def jacobi(A, b, xinit, tolerance=1.0e-6, maxIter=100):
             x[i] = (b[i] - T_sum) / A[i,i]
         #print(x)
         roots[iter_count+1] = x
-        err = max(abs(x - roots[iter_count]))
+        err = norm((b - np.dot(A, x)), -1)
         #print(err)
         iter_count += 1
 
@@ -293,7 +312,7 @@ def gausssiedel(A, b, xinit, tolerance=1.0e-6, maxIter=100):
     iter_count = 0
     roots = np.zeros((maxIter, n))
     roots[0] = xinit
-    err = 10    # written as max(x_i-x) for now, should change to backward error ||b-Axi||_{\infty} later
+    err = norm((b - np.dot(A, x)), -1)
 
     while err > tolerance and iter_count < maxIter:
 
@@ -308,7 +327,7 @@ def gausssiedel(A, b, xinit, tolerance=1.0e-6, maxIter=100):
 
         #print(x)
         roots[iter_count+1] = x
-        err = max(abs(x - roots[iter_count]))
+        err = norm((b - np.dot(A, x)), -1)
         iter_count += 1
 
     return x
