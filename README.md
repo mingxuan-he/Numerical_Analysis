@@ -41,11 +41,12 @@ Below is a brief description of what each algorithm in the package does. I did n
 - This algorithm finds a root of a function by iteratively linearizing the function (using its secant) to approach the root. It's similar to Newton's Method, except that the secant method only requires evaluating f(x), but not its derivative. Less accurate but useful when the derivative is unknown.
 - Requirement: r is likely but not necessarily a simple root.
 
-### LU factorization (*lu, lusolve, noswaplu, noswaplusolve*)
+### LU factorization (*lu, lusolve*)
 - Implemented in numerics2_he
 - Usage: Precise root finding for systems of linear equations 
-- This algorithm finds the root for a system of linear equations (in matrix form, Ax=b where A is a n by n matrix and b is a vector of size n) by factoring the permuted coefficient matrix PA (alternatively A itself) into a lower-triangular matrix L and an upper triangular matrix U, then solve PAx=LUx=Pb (alternatively Ax=LUx=b) using forward-backward substitution.
+- This algorithm finds the root for a system of linear equations (in matrix form, Ax=b where A is a n by n matrix and b is a vector of size n) by factoring the permuted matrix PA (permutation is done using partial pivoting) into a lower-triangular matrix L and an upper triangular matrix U, then solve PAx=LUx=Pb using forward-backward substitution.
 - Helper functions: 
+  - A=LU factorization (no swap): *noswaplu, noswaplusolve*
   - Row operations: *rowswap, rowscale, rowdiff*
   - Foward and backward substitution: *forwardsub, backwardsub, fbsolve*
 
@@ -53,7 +54,7 @@ Below is a brief description of what each algorithm in the package does. I did n
 - Implemented in numerics2_he
 - Usage: Iterative rooting finding for systems of linear equations
 - This algorithm solves Ax=b iteratively using Jacobi Method (additive decomposition)
-- Helper function: *add_decomp*
+- Helper functions: *add_decomp*, *norm*
 
 ### Gauss-Siedel Method (*gausssiedel*)
 - Implemented in numerics2_he
