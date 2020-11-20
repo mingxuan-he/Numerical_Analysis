@@ -1,15 +1,15 @@
 # Numerical Analysis by Mingxuan He
 ## Description:
-I'm currently (Fall 2020 term 2) taking MAT-317 Numerical Analysis, an advanced-level applied mathematics course at Grinnell College. During the course I would regularly implement numerical algorithms in Python (maybe in MATLAB in some rare occasions), and I will be sharing my code on Github along the way. 
+I am a mathematics and economics double major at Grinnell College. Currently (Fall 2020 Term 2) I'm taking MAT-317 Numerical Analysis, an advanced-level applied mathematics course. Throughout the course I will regularly implement numerical algorithms in Python (maybe MATLAB in some rare occasions), and I will be sharing my code on Github along the way. 
 
-Environment: Python 3.7 with Jetbrains Pycharm
+Environment: Python 3.7 with Jetbrains Pycharm Ver. 2020.1
 
 Packages used: numpy, matplotlib
 
 Citations: Some code snippets and most test files are taken from my instructor prof. Jeffery Blanchard.
 
 ## Algorithms:
-Below is a brief description of what each algorithm in the package does. I did not have time for a comprehensive documentation, but you can refer to comments in the code for more information.
+Below is a brief description of what each algorithm in the package does. I did not have time for a comprehensive documentation, but in most cases the comments in the code will provide more detailed information.
 
 ### Nested Polynomials (*polynest*)
 - Implemented in numerics0_he
@@ -65,3 +65,9 @@ Below is a brief description of what each algorithm in the package does. I did n
 - Implemented in numerics4_he
 - Usage: Modeling data
 - This algorithm uses LU factorization to solve the system A^tAx=A^tb to find a best-fit model that satisfies the least squares condition.
+
+### QR Factorization with Householder Reflectors (*qr, qrsolve*)
+- Implemented in numerics4_he
+- Usage: Solving systems of equations (can be used for least squares)
+- This algorithm solves Ax=b where A is an m by n matrix. Uses householder reflectors to factor A into an orthogonal matrix Q and an upper triangular matrix R, then solves Rx=Q^Tb
+- Helper function: *householder*
