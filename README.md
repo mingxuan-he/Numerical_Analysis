@@ -55,6 +55,7 @@ Below is a brief description of what each algorithm in the package does. I did n
 - Usage: Iterative rooting finding for systems of linear equations
 - This algorithm solves Ax=b iteratively using Jacobi Method (additive decomposition)
 - Helper functions: *add_decomp*, *norm*
+- The algorithm will converge to a unique root if A is strictly diagonally dominant.
 
 ### Gauss-Siedel Method (*gausssiedel*)
 - Implemented in numerics2_he
