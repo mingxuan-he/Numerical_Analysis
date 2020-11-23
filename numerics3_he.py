@@ -25,7 +25,7 @@ def newtondd(xdata,ydata):
             ddtable[row,col] = (ddtable[row,col-1] - ddtable[row-1,col-1]) / (xdata[row] - xdata[row - col])
         coeffs[col] = ddtable[col,col]
 
-    print(ddtable)
+    # print(ddtable)
     return coeffs
 
 
