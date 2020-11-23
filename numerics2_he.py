@@ -10,7 +10,7 @@ def norm(vec, l):
     vec = np.asarray(vec)
 
     if l == -1:
-        return max(abs(vec))
+        return np.amax(abs(vec))
 
     elif l > 0:
         powerf = lambda t: t**l
@@ -68,6 +68,7 @@ def noswapLU(matrix):
             A = rowdiff(A,row,col,scalefactor)
 
     return L, A
+
 
 def backsub(U,b):
     # This function takes in an upper triangular matrix U and solves the system Ux=b using backward substitution
@@ -272,7 +273,7 @@ def jacobi(A, b, xinit, tolerance=1.0e-6, maxIter=100):
     roots[0] = xinit
     err = norm((b - np.dot(A, x)), -1)
 
-    while err > tolerance and iter_count < maxIter:
+    while err > tolerance and iter_count < maxIter-1:
 
         for i in range(n): # each entry of x
             T_sum = 0
@@ -282,9 +283,9 @@ def jacobi(A, b, xinit, tolerance=1.0e-6, maxIter=100):
                     #print("For i = %d, j = %d, T sum is %f" % (i,j,T_sum))
 
             x[i] = (b[i] - T_sum) / A[i,i]
-        #print(x)
+        print("x", x)
         roots[iter_count+1] = x
-        err = norm((b - np.dot(A, x)), -1)
+        err = norm(b - np.dot(A, x), -1)
         #print(err)
         iter_count += 1
 
@@ -314,7 +315,7 @@ def gausssiedel(A, b, xinit, tolerance=1.0e-6, maxIter=100):
     roots[0] = xinit
     err = norm((b - np.dot(A, x)), -1)
 
-    while err > tolerance and iter_count < maxIter:
+    while err > tolerance and iter_count < maxIter-1:
 
         for i in range(n): # each entry of x
             T_sum = 0
