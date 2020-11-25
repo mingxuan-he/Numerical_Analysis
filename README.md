@@ -55,6 +55,7 @@ Below is a brief description of what each algorithm in the package does. I did n
 - Usage: Iterative rooting finding for systems of linear equations
 - This algorithm solves Ax=b iteratively using Jacobi Method (additive decomposition)
 - Helper functions: *add_decomp*, *norm*
+- The algorithm will converge to a unique root if A is strictly diagonally dominant.
 
 ### Gauss-Siedel Method (*gausssiedel*)
 - Implemented in numerics2_he
@@ -63,7 +64,7 @@ Below is a brief description of what each algorithm in the package does. I did n
 
 ### Least Squares (*leastSquares_lu*)
 - Implemented in numerics4_he
-- Usage: Modeling data
+- Usage: Modeling data (approximation)
 - This algorithm uses LU factorization to solve the system A^tAx=A^tb to find a best-fit model that satisfies the least squares condition.
 
 ### QR Factorization with Householder Reflectors (*qr, qrsolve*)
@@ -71,3 +72,9 @@ Below is a brief description of what each algorithm in the package does. I did n
 - Usage: Solving systems of equations (can be used for least squares)
 - This algorithm solves Ax=b where A is an m by n matrix. Uses householder reflectors to factor A into an orthogonal matrix Q and an upper triangular matrix R, then solves Rx=Q^Tb
 - Helper function: *householder*
+
+### Newton Polynomial Interpolation (*newtonInterp*)
+- Implemented in numerics3_he
+- Usage: Modeling data (precise)
+- This algorithm models data points (x_i,y_i) with a Newton Polynomial using a divided differences table.
+- Helper function: *newtondd*
