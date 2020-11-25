@@ -75,6 +75,11 @@ Below is a brief description of what each algorithm in the package does. I did n
 
 ### Newton Polynomial Interpolation (*newtonInterp*)
 - Implemented in numerics3_he
-- Usage: Modeling data (precise)
+- Usage: Modeling data (precise interpolation)
 - This algorithm models data points (x_i,y_i) with a Newton Polynomial using a divided differences table.
 - Helper function: *newtondd*
+
+### Chebyshev Interpolation (*chebyshevRoots,chebyshevInterp*)
+- Implemented in numerics3_he
+- Usage: Approximate a function on an interval
+- This algorithm approximates a function on a given interval by sampling on Chebyshev nodes (roots of the nth Chebyshev polynomial), thus minimizing interpolation errors.
