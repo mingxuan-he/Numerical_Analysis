@@ -1,4 +1,4 @@
-# Numerical Algorithms Package by Mingxuan He
+# Numerical Algorithms by Mingxuan He
 ## Description:
 I am a mathematics and economics double major at Grinnell College. Currently (Fall 2020 Term 2) I'm taking MAT-317 Numerical Analysis, an advanced-level applied mathematics course. Throughout the course I will regularly implement numerical algorithms in Python (maybe MATLAB in some rare occasions), and I will be sharing my code on Github along the way. Feel free to use this package however you'd like as long as this github repo is cited.
 
