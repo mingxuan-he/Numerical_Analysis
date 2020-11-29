@@ -10,7 +10,9 @@ Citations: Some code snippets and most test files are taken from my instructor p
 
 ### Personal Info:
 Linkedin: https://www.linkedin.com/in/mingxuanhe/
+
 Personal Website: https://mingxuanhe.godaddysites.com/
+
 Feel free to reach out for questions/comments/concerns/suggestions!
 
 ## Algorithms:
