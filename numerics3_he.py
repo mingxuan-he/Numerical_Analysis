@@ -184,3 +184,32 @@ def cubiccoeff(xdata, ydata, end_condition="natural", df = lambda x: 0):
     return coeff
 
 
+def cubic_eval(xdata, ydata, x, end_condition="natural", df = lambda x: 0):
+    # xdata, ydata, end_condition, df: same as cubiccoeff
+    # x: a point for evaluation
+
+    # Binary search for the position of x
+    left_idx = 0
+    right_idx = len(xdata) - 1
+    mid_idx = 0
+
+    while xdata[left_idx+1] < x or xdata[right_idx-1] > x:
+        mid_idx = (right_idx - left_idx) // 2
+
+        if xdata[mid_idx] < x:
+            left_idx = mid_idx
+
+        elif xdata[mid_idx] > x:
+            right_idx = mid_idx
+
+        # x is a given point
+        else:
+            return ydata[mid_idx]
+        #print(left_idx, right_idx)
+
+    # Evaluate using nested polynomial
+    coeff = cubiccoeff(xdata,ydata,end_condition,df)
+    polycoeff = coeff[:,left_idx]
+    evaluation = num0.polynest(x,polycoeff,xdata)
+
+    return evaluation
