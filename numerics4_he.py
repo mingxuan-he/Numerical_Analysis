@@ -29,14 +29,17 @@ def householder(vec):
     m = vec.size
     w = np.zeros(m)
     w[0] = num2.norm(vec,2)
-    # print("input",vec)
-    # print("w", w)
-    v = w - vec
-    # print("v", v)
-    vt = np.transpose(v)
-    P = np.outer(v,vt) / np.dot(vt,v)
-    # print("P",P)
-    I = np.identity(m)
+    #print("input",vec)
+    #print("w", w)
+    if np.array_equal(w, vec):
+        return np.identity(m)
+    else:
+        v = w - vec
+        # print("v", v)
+        vt = np.transpose(v)
+        P = np.outer(v,vt) / np.dot(vt,v)
+        # print("P",P)
+        I = np.identity(m)
 
     return I - 2 * P
 
@@ -96,7 +99,6 @@ def qrsolve(A,b):
     x = num2.backsub(R,QTb)
 
     resid = num2.norm(b-np.dot(A,x),2)
-
 
     return x, resid
 
