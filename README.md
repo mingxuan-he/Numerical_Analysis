@@ -1,12 +1,19 @@
-# Numerical Analysis by Mingxuan He
+# Numerical Algorithms by Mingxuan He
 ## Description:
-I am a mathematics and economics double major at Grinnell College. Currently (Fall 2020 Term 2) I'm taking MAT-317 Numerical Analysis, an advanced-level applied mathematics course. Throughout the course I will regularly implement numerical algorithms in Python (maybe MATLAB in some rare occasions), and I will be sharing my code on Github along the way. 
+I am a mathematics and economics double major at Grinnell College. Currently (Fall 2020 Term 2) I'm taking MAT-317 Numerical Analysis, an advanced-level applied mathematics course. Throughout the course I will regularly implement numerical algorithms in Python (maybe MATLAB in some rare occasions), and I will be sharing my code on Github along the way. Feel free to use this package however you'd like as long as this github repo is cited.
 
 Environment: Python 3.7 with Jetbrains Pycharm Ver. 2020.1
 
 Packages used: numpy, matplotlib
 
 Citations: Some code snippets and most test files are taken from my instructor prof. Jeffery Blanchard.
+
+### Personal Info:
+Linkedin: https://www.linkedin.com/in/mingxuanhe/
+
+Personal Website: https://mingxuanhe.godaddysites.com/
+
+Feel free to reach out for questions/comments/concerns/suggestions!
 
 ## Algorithms:
 Below is a brief description of what each algorithm in the package does. I did not have time for a comprehensive documentation, but in most cases the comments in the code will provide more detailed information.
@@ -75,6 +82,11 @@ Below is a brief description of what each algorithm in the package does. I did n
 
 ### Newton Polynomial Interpolation (*newtonInterp*)
 - Implemented in numerics3_he
-- Usage: Modeling data (precise)
+- Usage: Modeling data (precise interpolation)
 - This algorithm models data points (x_i,y_i) with a Newton Polynomial using a divided differences table.
 - Helper function: *newtondd*
+
+### Chebyshev Interpolation (*chebyshevRoots,chebyshevInterp*)
+- Implemented in numerics3_he
+- Usage: Approximate a function on an interval
+- This algorithm approximates a function on a given interval by sampling on Chebyshev nodes (roots of the nth Chebyshev polynomial), thus minimizing interpolation errors.
