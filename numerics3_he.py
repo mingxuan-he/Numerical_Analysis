@@ -1,5 +1,6 @@
 import numpy as np
 import numerics0_he as num0
+import numerics4_he as num4
 
 
 def newtondd(xdata,ydata):
@@ -83,3 +84,103 @@ def func(x):
 
 chebyshevInterp(func,6,interval=[0,2*np.pi])
 """
+
+
+def cubiccoeff(xdata, ydata, end_condition="natural", df = lambda x: 0):
+    # xdata, ydata: vectors that need to be interploated as (x[i],y[i]). needs to be sorted
+    # end_condition is the specified endpoint condition, default is natural
+    # df is the derivative of the interpolation function, default is f': R->{0}
+
+    # Check inputs
+    xdata = np.asarray(xdata)
+    ydata = np.asarray(ydata)
+    m = len(xdata)
+    n = len(ydata)
+    if m !=n:
+        raise ValueError("Data points do not match.")
+
+    # Initialization
+    left_endpoint = xdata[0]
+    right_endpoint = xdata[-1]
+    coeff = np.zeros((n-1,4))
+    x_dist = np.zeros(n-1)
+    y_dist = np.zeros(n-1)
+    a = b = d = np.zeros(n-1)
+
+    # Calculate length of intervals (delta)
+    for i in range(0,n-1):
+        x_dist[i] = xdata[i+1] - xdata[i]
+        y_dist[i] = ydata[i+1] - ydata[i]
+
+    # Calculate coefficients a,b,c,d
+
+    # a
+    a = ydata[:-1]
+
+    # c
+    if end_condition == "natural":
+
+        # Make the delta matrix
+        delta_mat = np.identity(n)
+        for row in range(0,n-2):
+            delta_mat[row+1,row] = x_dist[row]
+            delta_mat[row+1,row+1] = 2 * (x_dist[row] + x_dist[row+1])
+            delta_mat[row+1,row+2] = x_dist[row+1]
+        #print("matrix",delta_mat)
+
+        # Make the delta vector (as product)
+        delta_vec = np.zeros(n)
+        delta_vec[0] = 0
+        delta_vec[-1] = 0
+        for i in range(0,n-2):
+            delta_vec[i+1] = 3 * (y_dist[i+1]/x_dist[i+1] - y_dist[i]/x_dist[i])
+        #print("vec",delta_vec)
+        c,resid = num4.qrsolve(delta_mat,delta_vec)
+
+    elif end_condition == "clamped":
+
+        if df == (lambda x: 0):
+            raise ValueError("Derivative is required to use clamped cubic spline.")
+
+        # Make the delta matrix
+        delta_mat = np.identity(n)
+        delta_mat[0,0] = 2 * x_dist[0]
+        delta_mat[0,1] = x_dist[0]
+        for row in range(0,n-2):
+            delta_mat[row + 1, row] = x_dist[row]
+            delta_mat[row + 1, row + 1] = 2 * (x_dist[row] + x_dist[row + 1])
+            delta_mat[row + 1, row + 2] = x_dist[row + 1]
+        delta_mat[-1,-2] = x_dist[-1]
+        delta_mat[-1,-1] = 2 * x_dist[-1]
+
+        # Make the delta vector (as product)
+        delta_vec = np.zeros(n)
+        delta_vec[0] = 3 * (y_dist[0] / x_dist[0] - df(left_endpoint))
+        delta_vec[-1] = 3 * (df(right_endpoint) - y_dist[-1] / x_dist[-1])
+        for i in range(0, n - 2):
+            delta_vec[i + 1] = 3 * (y_dist[i + 1] / x_dist[i + 1] - y_dist[i] / x_dist[i])
+        # print("vec",delta_vec)
+        c, resid = num4.qrsolve(delta_mat, delta_vec)
+
+    else:
+        raise ValueError("Choose an appropriate endpoint condition from the following: natural, clamped.")
+
+    # d
+    for i in range(n-1):
+        d[i] = (c[i+1] - c[i]) / (3 * x_dist[i])
+
+    # b
+    for i in range(n-1):
+        b[i] = y_dist[i] / x_dist[i] - (x_dist[i] / 3) * (2 * c[i] + c[i+1])
+
+    coeff = np.stack((a,b,c[:-1],d))
+    """
+    print("a",a)
+    print("b",b)
+    print("c",c)
+    print("d",d)
+    """
+
+    return coeff
+
+
