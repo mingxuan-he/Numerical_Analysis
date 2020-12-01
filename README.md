@@ -6,7 +6,7 @@ Environment: Python 3.7 with Jetbrains Pycharm Ver. 2020.1
 
 Packages used: numpy, matplotlib
 
-Citations: Some code snippets and most test files are taken from my instructor prof. Jeffery Blanchard.
+Citations: Some code snippets and most test files are taken from my instructor Dr. Jeffery Blanchard.
 
 ### Personal Info:
 Linkedin: https://www.linkedin.com/in/mingxuanhe/
@@ -82,11 +82,16 @@ Below is a brief description of what each algorithm in the package does. I did n
 
 ### Newton Polynomial Interpolation (*newtonInterp*)
 - Implemented in numerics3_he
-- Usage: Modeling data (precise interpolation)
+- Usage: Interpolate data points
 - This algorithm models data points (x_i,y_i) with a Newton Polynomial using a divided differences table.
 - Helper function: *newtondd*
 
-### Chebyshev Interpolation (*chebyshevRoots,chebyshevInterp*)
+### Chebyshev Interpolation (*chebyshevRoots, chebyshevInterp*)
 - Implemented in numerics3_he
 - Usage: Approximate a function on an interval
 - This algorithm approximates a function on a given interval by sampling on Chebyshev nodes (roots of the nth Chebyshev polynomial), thus minimizing interpolation errors.
+
+### Cubic Spline(*cubiccoeff, cubic_eval*)
+- Implemented in numerics3_he
+- Usage: Interpolate data points
+- This algorithm smoothly interpolates set of data points (x_i,y_i) with cubic functions on each interval, then evaluates the cubic polynomial at a given point.
