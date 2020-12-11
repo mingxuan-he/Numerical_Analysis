@@ -91,7 +91,17 @@ Below is a brief description of what each algorithm in the package does. I did n
 - Usage: Approximate a function on an interval
 - This algorithm approximates a function on a given interval by sampling on Chebyshev nodes (roots of the nth Chebyshev polynomial), thus minimizing interpolation errors.
 
-### Cubic Spline(*cubiccoeff, cubic_eval*)
+### Cubic Spline (*cubiccoeff, cubic_eval*)
 - Implemented in numerics3_he
 - Usage: Interpolate data points
 - This algorithm smoothly interpolates set of data points (x_i,y_i) with cubic functions on each interval, then evaluates the cubic polynomial at a given point.
+
+### Simpson's Method (*simpson*)
+- Implemented in numerics5_he
+- Usage: Approximate a finite integral
+- This algorithm computes an approximate value for a finite integral using a quadratic interpolant on the endpoints and midpoint of the interval.
+
+### Composite Simpson's Method (*compositeSimpson*)
+- Implemented in numerics5_he
+- Usage: Approximate a finite integral
+- This algorithm computes an approximate value for a finite integral by partitioning the interval and performing Simpson's Method on each smaller interval.
