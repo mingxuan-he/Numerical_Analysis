@@ -8,8 +8,6 @@ def polynest(x, a, b=[]):
     # This function evaluate a polynomial with coefficients a and basepoints b at the point x and returns that value as y
 
     # Read a,b as numpy arrays
-    if b is None:
-        b = []
     a = np.asarray(a)
     b = np.asarray(b)
 
