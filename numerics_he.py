@@ -74,7 +74,7 @@ def add_decomp(A):
     return num2.add_decomp(A)
 
 
-def jacobi(A, b, xinit, tolerance=1.0e-6, maxIter=100)
+def jacobi(A, b, xinit, tolerance=1.0e-6, maxIter=100):
     return num2.jacobi(A, b, xinit, tolerance=1.0e-6, maxIter=100)
 
 
