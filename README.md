@@ -105,3 +105,20 @@ Below is a brief description of what each algorithm in the package does. I did n
 - Implemented in numerics5_he
 - Usage: Approximate a finite integral
 - This algorithm computes an approximate value for a finite integral by partitioning the interval and performing Simpson's Method on each smaller interval.
+
+### Gaussian Quadrature (*gaussQuad*)
+- Implemented in numerices5_he
+- Usage: Approximate a finite integral
+- This algorithm computes an approximate value for a finite integral using roots of the legendre polynomials and the gaussian quadrature method.
+
+## Final Project: Gradient Descent method for numerical optimization
+### Successive Parabolic Interpolation (*SPI*)
+- Implemented in numericsproj_he
+- Usage: Find minimum for a single variable objective function.
+
+### Gradient Descent (*gradient_descent*)
+- Implemented in numericsproj_he
+- Usage: Find minimum for a multivariable objective function (global minimum if the objective is convex, local minimum if otherwise)
+- Line search method options: fixed step size or backtracking (using the Wolfe conditions as criteria)
+- Helper function: 
+  - line_search
