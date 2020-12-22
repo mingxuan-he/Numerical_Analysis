@@ -5,6 +5,12 @@ import matplotlib.pyplot as plt
 
 # Successive parabolic interpolation
 def SPI(function, x_inits, tolerance=1.0e-6, maxIter=100, plot=False, plot_range=np.arange(0,10,0.01)):
+    # function: the objective function
+    # x_inits: three initial approximations
+    # tolerance: maximum error allowed
+    # maxIter: maximum number of iterations
+    # plot: whether to plot the parabolas
+    # plot_range: if plot=True, the input range for the plot
 
     # Check Inputs
     x_inits = np.asarray(x_inits)
@@ -51,6 +57,12 @@ def SPI(function, x_inits, tolerance=1.0e-6, maxIter=100, plot=False, plot_range
 
 
 def line_search(function, gradient, x_k, alpha_init, beta_1, beta_2):
+    # function: the objective function
+    # gradient: the gradient function
+    # x_k: current point of iteration
+    # alpha_init: a value of alpha to start with
+    # beta_1: parameter for the 1st Wolfe condition
+    # beta_2: parameter for the 2nd Wolfe condition
 
     # Check Inputs
     if not 0 < beta_1 < beta_2 < 1:
@@ -102,12 +114,12 @@ def line_search(function, gradient, x_k, alpha_init, beta_1, beta_2):
     return newx
 
 
-def gradient_descent(function, gradient, x_init=[], tolerance= 1.0e-6, maxIter=100, ls_method="fixed", step_size=0.0):
+def gradient_descent(function, gradient, x_init=[], tolerance= 1.0e-6, maxIter=100, ls_method="backtracking", step_size=0.0):
 
     # function: the objective function, a n-variable function that takes in an array and outputs a real number
     # gradient: the gradient function of f, a list of n partial derivatives of f with respect to the x_i's
     # x_init: the initial approximation, an array that matches the dimension of f, default is the zero vector
-    # step: select ls for line search using SPI, fixed for a fixed step size
+    # ls_method: select backtracking for backtracking line search, fixed for a fixed step size
     # step_size: size of one step, required if choose fixed step
 
     # Check inputs
@@ -149,7 +161,7 @@ def gradient_descent(function, gradient, x_init=[], tolerance= 1.0e-6, maxIter=1
     return x, optimality
 
 """
-    Exact line search with SPI (I can't get this to work, I don't know why)
+    Exact line search with SPI (I can't get this to work yet)
     elif ls_method == "SPI":
         while err > tolerance and k <= maxIter:
             gradx = gradient(x)
